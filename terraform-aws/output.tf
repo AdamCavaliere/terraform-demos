@@ -5,3 +5,7 @@ output "app_subnet" {
 output "cidr_block" {
   value = "${aws_vpc.main.cidr_block}"
 }
+
+output "ip_address" {
+    value = "${aws_instance.server.*.private_ip}"
+}
