@@ -8,6 +8,7 @@ resource "aws_instance" "server" {
   availability_zone = "${lookup(var.avail_zone, count.index)}"
   count = 2
   tags {
+    Name = "${var.app_name}-server-${count.index}"
     owner = "Adam"
     TTL = 1
   }
