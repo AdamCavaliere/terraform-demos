@@ -1,6 +1,11 @@
+variable "location" {
+  description = "Resource location"
+  default = "West US"
+}
+
 variable "ami_id" {
   description = "ID of the AMI to provision. Default is Ubuntu 14.04 Base Image"
-  default = "ami-6c4f4a0c"
+  default = "ami-154f4a75"
 }
 
 variable "instance_type" {

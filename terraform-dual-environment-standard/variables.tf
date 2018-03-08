@@ -1,3 +1,5 @@
+// AWS Variables
+
 variable "ami_id" {
   description = "ID of the AMI to provision. Default is Ubuntu 14.04 Base Image"
   default = "ami-6c4f4a0c"
@@ -43,4 +45,21 @@ variable "avail_zone" {
       "0" = "us-west-1a"
       "1" = "us-west-1c"
   }
+}
+
+// Azure Variables
+
+variable "app_name" {
+    description = "Name of Application"
+    default = "defaultapp"
+}
+
+variable "networkEnv" {
+    description = "e.g. Dev, Stage, Prod"
+    default = "dev"
+}
+
+variable "location" {
+  description = "Resource location"
+  default = "West US"
 }
