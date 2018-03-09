@@ -20,16 +20,6 @@ variable "aws_region" {
   default = "us-west-1"
 }
 
-variable "app_name" {
-    description = "Name of Application"
-    default = "default_app"
-}
-
-variable "networkEnv" {
-    description = "e.g. Dev, Stage, Prod"
-    default = "dev"
-}
-
 variable "owner" {
     description = "Owner of Application"
     default = "AwesomeDev"

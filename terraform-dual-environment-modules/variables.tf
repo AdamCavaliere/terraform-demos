@@ -1,3 +1,4 @@
+# Azure Variables
 variable "location" {
   description = "Resource location"
   default = "West US"
@@ -6,11 +7,6 @@ variable "location" {
 variable "ami_id" {
   description = "ID of the AMI to provision. Default is Ubuntu 14.04 Base Image"
   default = "ami-154f4a75"
-}
-
-variable "instance_type" {
-  description = "type of EC2 instance to provision."
-  default = "t2.micro"
 }
 
 variable "name" {
@@ -25,17 +21,12 @@ variable "aws_region" {
 
 variable "app_name" {
     description = "Name of Application"
-    default = "default_app"
+    default = "defaultapp"
 }
 
 variable "networkEnv" {
     description = "e.g. Dev, Stage, Prod"
     default = "dev"
-}
-
-variable "owner" {
-    description = "Owner of Application"
-    default = "AwesomeDev"
 }
 
 variable "availability_zone" {
