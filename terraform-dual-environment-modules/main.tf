@@ -12,7 +12,7 @@ module "linuxservers" {
     public_ip_dns       = ["linvmip1","linvmip2"]
     resource_group_name = "azc-rg"
     nb_public_ip        = "2"
-    ssh_key = ""
+    ssh_key = "https://raw.githubusercontent.com/AdamCavaliere/terraform-demos/master/terraform-dual-environment-modules/pub.rsa"
   }
 
 // AWS 
