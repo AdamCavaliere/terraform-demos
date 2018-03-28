@@ -10,7 +10,7 @@ data "terraform_remote_state" "networkdetails" {
 
 resource "azurerm_resource_group" "resource_gp" {
   name     = "${var.app_name}-rg"
-  location = "${terraform_remote_state.networkdetails.location}"
+  location = "${data.terraform_remote_state.networkdetails.location}"
 }
 
 resource "azurerm_network_interface" "netint" {
@@ -21,7 +21,7 @@ resource "azurerm_network_interface" "netint" {
 
   ip_configuration {
     name                          = "ipconfig-${count.index + 1}"
-    subnet_id                     = "${terraform_remote_state.networkdetails.mainsubnet}"
+    subnet_id                     = "${data.terraform_remote_state.networkdetails.mainsubnet}"
     private_ip_address_allocation = "dynamic"
   }
 }
