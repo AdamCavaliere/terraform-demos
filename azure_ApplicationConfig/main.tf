@@ -8,11 +8,9 @@ data "terraform_remote_state" "networkdetails" {
   }
 }
 
-location = "${terraform_remote_state.networkdetails.location}"
-
 resource "azurerm_resource_group" "resource_gp" {
   name     = "${var.app_name}-rg"
-  location = "${var.location}"
+  location = "${terraform_remote_state.networkdetails.location}"
 }
 
 resource "azurerm_network_interface" "netint" {
