@@ -8,6 +8,10 @@ data "terraform_remote_state" "networkdetails" {
   }
 }
 
+variable "location" {
+  value = "${terraform_remote_state.networkdetails.location}"
+}
+
 resource "azurerm_resource_group" "resource_gp" {
   name     = "${var.app_name}-rg"
   location = "${var.location}"
