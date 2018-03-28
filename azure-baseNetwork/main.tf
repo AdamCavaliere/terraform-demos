@@ -1,3 +1,8 @@
+resource "azurerm_resource_group" "resource_gp" {
+  name     = "${var.app_name}-rg"
+  location = "${var.location}"
+}
+
 resource "azurerm_virtual_network" "network" {
   name                = "${var.app_name}-network"
   address_space       = ["10.0.0.0/16"]
