@@ -18,10 +18,10 @@ else:
 
 #User Configurable Vars - if utilizing Vault, replace the ts['foo'] values.
 TFEorganization = "azc"
-TFEworkspace = "Main-BaseNetwork"
+TFEworkspace = "Company-XYZ-Application1"
 vcsOrganization = "AdamCavaliere"
 vcsWorkspace = "terraform-demos"
-vcsWorkingDirectory = "azure-baseNetwork"
+vcsWorkingDirectory = "azure_ApplicationConfig"
 
 
 #Base configurations
