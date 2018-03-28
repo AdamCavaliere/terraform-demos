@@ -10,17 +10,17 @@ resource "azurerm_subnet" "test" {
   resource_group_name  = "${azurerm_resource_group.resource_gp.name}"
   virtual_network_name = "${azurerm_virtual_network.network.name}"
   address_prefix       = "10.0.${count.index + 1}.0/24"
-  count = 2
+  count = 1
 }
 
 resource "azurerm_network_interface" "netint" {
   name                = "networkinterface-${count.index + 1}"
   location            = "${azurerm_resource_group.resource_gp.location}"
   resource_group_name = "${azurerm_resource_group.resource_gp.name}"
-  count = 2
+  count = 3
   ip_configuration {
     name                          = "ipconfig-${count.index + 1}"
-    subnet_id                     = "${element(azurerm_subnet.test.*.id, count.index)}"
+    subnet_id                     = "${element(azurerm_subnet.test.*.id, 0)}"
     private_ip_address_allocation = "dynamic"
   }
 }
