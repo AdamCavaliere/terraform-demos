@@ -1,5 +1,13 @@
 provider "azurerm" {}
 
+data "terraform_remote_state" "networkdetails" {
+  backend = "atlas"
+
+  config {
+    name = "azc/${var.network_workspace}"
+  }
+}
+
 resource "azurerm_resource_group" "resource_gp" {
   name     = "${var.app_name}-rg"
   location = "${var.location}"
@@ -13,7 +21,7 @@ resource "azurerm_network_interface" "netint" {
 
   ip_configuration {
     name                          = "ipconfig-${count.index + 1}"
-    subnet_id                     = "${element(azurerm_subnet.test.*.id, count.index)}"
+    subnet_id                     = "${terraform_remote_state.networkdetails.mainsubnet}"
     private_ip_address_allocation = "dynamic"
   }
 }
