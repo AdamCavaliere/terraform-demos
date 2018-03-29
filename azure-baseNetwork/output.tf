@@ -3,5 +3,5 @@ output "mainsubnet" {
 }
 
 output "location" {
-  value = "${var.location}"
+  value = "${azurerm_resource_group.resource_gp.location}"
 }
