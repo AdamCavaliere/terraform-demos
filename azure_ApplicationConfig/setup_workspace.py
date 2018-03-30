@@ -18,7 +18,7 @@ else:
 
 #User Configurable Vars - if utilizing Vault, replace the ts['foo'] values.
 TFEorganization = "azc"
-TFEworkspace = "Company-XYZ-Application1"
+TFEworkspace = "ExampleApplication2-test"
 vcsOrganization = "AdamCavaliere"
 vcsWorkspace = "terraform-demos"
 vcsWorkingDirectory = "azure_ApplicationConfig"
@@ -107,6 +107,7 @@ def createVariables():
       payload = createVarPayload(varName,defaultVal,TFEorganization,TFEworkspace,"terraform","false")
       try:
         r = requests.post(createVariablesURL, headers=headers, data=json.dumps(payload))
+        print r.text
       except:
         print r.status_code()
 
