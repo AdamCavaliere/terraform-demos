@@ -25,7 +25,18 @@ module "security_group" {
 
   ingress_cidr_blocks = ["0.0.0.0/0"]
   ingress_rules       = ["http-80-tcp", "https-443-tcp", "ssh-tcp"]
-  egress_rules        = ["all-all"]
+
+  ingress_with_cidr_blocks = [
+    {
+      from_port   = 8200
+      to_port     = 8200
+      protocol    = "tcp"
+      description = "Vault-Server"
+      cidr_blocks = "0.0.0.0/0"
+    },
+  ]
+
+  egress_rules = ["all-all"]
 
   tags = {
     Owner = "Adam"
