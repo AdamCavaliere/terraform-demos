@@ -45,10 +45,18 @@ resource "azurerm_virtual_machine" "app_vm" {
   }
 
   storage_os_disk {
-    name              = "myosdisk1-${count.index + 1}"
+    name              = "${var.app_name}-osdisk1-${count.index + 1}"
     caching           = "ReadWrite"
     create_option     = "FromImage"
     managed_disk_type = "Standard_LRS"
+  }
+  
+  storage_data_disk {
+    name              = "${var.app_name}-datadisk_${count.index + 1}"
+    managed_disk_type = "Standard_LRS"
+    create_option     = "Empty"
+    lun               = 0
+    disk_size_gb      = "1023"
   }
 
   os_profile {
