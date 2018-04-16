@@ -1,12 +1,15 @@
+#!/usr/bin/env python
 import requests
 import json
 import hcl #python pip package is pyhcl
 import os
+# Populate if you want to utilize Vault 
 utilizeVault = False
 vaultURL = "http://sevault.hashidemos.io:8200"
 secretLocation = "secret/adam/terraform"
 
-#Configure Vault and grab secrets
+#Will run against vault and grab secrets if the utilizeVault variable is set to True, else it will look for your TFE Org's Atlas Token 
+#as an environment variable.
 if utilizeVault == True:
   import hvac
   client = hvac.Client(url=vaultURL, token=os.environ['VAULT_TOKEN'])
@@ -18,10 +21,10 @@ else:
 
 #User Configurable Vars - if utilizing Vault, replace the ts['foo'] values.
 TFEorganization = "azc"
-TFEworkspace = "ExampleApplication1-test"
+TFEworkspace = "Vault"
 vcsOrganization = "AdamCavaliere"
-vcsWorkspace = "terraform-demos"
-vcsWorkingDirectory = "azure_ApplicationConfig"
+vcsRepo = "terraform-demos" #This is the repo which you are linking to your TFE workspace
+vcsWorkingDirectory = "" #This can be blank - only needed to be specified if you are using a sub-directory in your repo.
 
 
 #Base configurations
@@ -33,6 +36,7 @@ tokenURL = 'https://app.terraform.io/api/v2/organizations/'+TFEorganization+'/oa
 
 def getoAuthToken(organization):
   r = requests.get(tokenURL, headers=headers)
+  validateRun(r)
   response = json.loads(r.text)
   return response['data'][0]['id']
 
@@ -59,7 +63,7 @@ def createVarPayload(varName,defaultVal,TFEorganization,TFEworkspace,category,se
   }
   return varPayload
 
-def createWorkspacePayload(vcsOrganization,vcsWorkspace,TFEworkspace,workingDirectory,tfeOrganization):
+def createWorkspacePayload(vcsOrganization,vcsRepo,TFEworkspace,workingDirectory,tfeOrganization):
   oAuthToken = getoAuthToken(tfeOrganization)
   try:
     workingDirectory
@@ -71,7 +75,7 @@ def createWorkspacePayload(vcsOrganization,vcsWorkspace,TFEworkspace,workingDire
       "name":TFEworkspace,
       "working-directory": workingDirectory,
       "vcs-repo": {
-        "identifier": vcsOrganization+"/"+vcsWorkspace,
+        "identifier": vcsOrganization+"/"+vcsRepo,
         "oauth-token-id": oAuthToken,
         "branch": "",
         "default-branch": "true"
@@ -82,10 +86,15 @@ def createWorkspacePayload(vcsOrganization,vcsWorkspace,TFEworkspace,workingDire
   }
   return workspacePayload
 
+def validateRun(runResponse):
+  if not (runResponse.status_code == 201 or runResponse.status_code == 200):
+    print str(runResponse.status_code) + ": " + str(runResponse.text) 
+
 def createWorkspace():
-  payload = createWorkspacePayload(vcsOrganization,vcsWorkspace,TFEworkspace,vcsWorkingDirectory,TFEorganization)
+  payload = createWorkspacePayload(vcsOrganization,vcsRepo,TFEworkspace,vcsWorkingDirectory,TFEorganization)
   try:
     r = requests.post(createWorkspaceURL, headers=headers, data=json.dumps(payload))
+    validateRun(r)
   except:
     print r.status_code()
 
@@ -107,7 +116,7 @@ def createVariables():
       payload = createVarPayload(varName,defaultVal,TFEorganization,TFEworkspace,"terraform","false")
       try:
         r = requests.post(createVariablesURL, headers=headers, data=json.dumps(payload))
-        print r.text
+        validateRun(r)
       except:
         print r.status_code()
 
@@ -121,6 +130,7 @@ def setEnvVariables():
     payload = createVarPayload(k,v['value'],TFEorganization,TFEworkspace,v['vartype'],v['sensitive'])
     try:
       r = requests.post(createVariablesURL, headers=headers, data=json.dumps(payload))
+      validateRun(r)
     except:
       print r.status_code
 

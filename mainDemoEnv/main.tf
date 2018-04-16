@@ -4,7 +4,7 @@ provider "aws" {
 
 resource "aws_instance" "server" {
   ami                    = "ami-0f0a16801b42b89e8"
-  instance_type          = "t2.small"
+  instance_type          = "t2.micro"
   availability_zone      = "us-east-2a"
   key_name               = "AZC"
   vpc_security_group_ids = ["${module.security_group.this_security_group_id}"]

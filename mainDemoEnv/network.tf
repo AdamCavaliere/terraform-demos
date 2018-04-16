@@ -42,3 +42,15 @@ module "security_group" {
     Owner = "Adam"
   }
 }
+
+data "aws_route53_zone" "selected" {
+  name = "spacelyspacesprockets.info."
+}
+
+resource "aws_route53_record" "www" {
+  zone_id = "${data.aws_route53_zone.selected.zone_id}"
+  name    = "${var.environment_name}.spacelyspacesprockets.info"
+  type    = "A"
+  ttl     = "300"
+  records = ["${aws_instance.server.public_ip}"]
+}
