@@ -51,6 +51,6 @@ resource "aws_route53_record" "www" {
   zone_id = "${data.aws_route53_zone.selected.zone_id}"
   name    = "${var.app_name}.spacelyspacesprockets.info"
   type    = "A"
-  ttl     = "180"
+  ttl     = "300"
   records = ["${aws_instance.server.public_ip}"]
 }
