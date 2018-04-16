@@ -55,7 +55,7 @@ resource "azurerm_virtual_machine" "app_vm" {
     name              = "${var.app_name}-${count.index + 1}-datadisk1"
     managed_disk_type = "Standard_LRS"
     create_option     = "Empty"
-    lun               = ${count.index}
+    lun               = "${count.index}"
     disk_size_gb      = "1023"
   }
   
