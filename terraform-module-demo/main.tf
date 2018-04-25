@@ -1,5 +1,13 @@
-provider "aws" {
-  region = "${var.aws_region}"
+provider "aws" {}
+
+//--------------------------------------------------------------------
+// Modules
+module "network" {
+  source  = "app.terraform.io/azc/network/aws"
+  version = "0.1.0"
+
+  region                   = "us-east-1"
+  subnet_availability_zone = "us-east-1a"
 }
 
 resource "aws_instance" "server" {
@@ -10,5 +18,5 @@ resource "aws_instance" "server" {
     Name = "Example Module Use"
   }
 
-  subnet_id = ""
+  subnet_id = "${module.network.demo_subnet_id}"
 }
