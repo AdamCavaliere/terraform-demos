@@ -13,7 +13,7 @@ module "network" {
 }
 
 resource "aws_instance" "server" {
-  ami           = "ami-6c4f4a0c"
+  ami           = "ami-04d93f8d139d78b9f"
   instance_type = "t2.micro"
 
   tags {
