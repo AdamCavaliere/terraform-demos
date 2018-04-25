@@ -4,7 +4,7 @@ provider "aws" {}
 // Modules
 module "network" {
   source  = "app.terraform.io/azc/network/aws"
-  version = "0.1.0"
+  version = "0.1.1"
 
   region                   = "us-east-1"
   subnet_availability_zone = "us-east-1a"
