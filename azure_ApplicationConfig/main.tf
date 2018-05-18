@@ -14,7 +14,7 @@ resource "azurerm_resource_group" "resource_gp" {
 }
 
 resource "azurerm_network_interface" "netint" {
-  name                = "networkinterface-${count.index + 1}"
+  name                = "networkinterface-test${count.index + 1}"
   location            = "${azurerm_resource_group.resource_gp.location}"
   resource_group_name = "${azurerm_resource_group.resource_gp.name}"
   count               = "${var.instance_count}"
