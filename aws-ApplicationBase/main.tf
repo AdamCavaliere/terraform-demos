@@ -19,7 +19,7 @@ module "ec2" {
   ami                         = "${var.ami_id}"
   instance_type               = "t2.micro"
   subnet_id                   = "${element(data.terraform_remote_state.networkdetails.public_subnets, 0)}"
-  vpc_security_group_ids      = ["${data.terraform_remote_state.networkdetails.security_group_id}"]
+  vpc_security_group_ids      = ["${data.terraform_remote_state.networkdetails.security_group}"]
   associate_public_ip_address = true
   key_name                    = "AZC"
 

@@ -25,7 +25,7 @@ module "security_group" {
   source = "terraform-aws-modules/security-group/aws"
 
   name        = "Base-Secuirty-${var.network_name}"
-  description = "Security group"
+  description = "Security Group"
   vpc_id      = "${module.vpc.vpc_id}"
 
   ingress_cidr_blocks = ["0.0.0.0/0"]
