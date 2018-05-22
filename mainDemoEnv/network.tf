@@ -44,12 +44,12 @@ module "security_group" {
 }
 
 data "aws_route53_zone" "selected" {
-  name = "spacelyspacesprockets.info."
+  name = "${var.domain_root}."
 }
 
 resource "aws_route53_record" "www" {
   zone_id = "${data.aws_route53_zone.selected.zone_id}"
-  name    = "${var.app_name}.spacelyspacesprockets.info"
+  name    = "${var.app_name}.${var.domain_root}"
   type    = "A"
   ttl     = "300"
   records = ["${aws_instance.server.public_ip}"]

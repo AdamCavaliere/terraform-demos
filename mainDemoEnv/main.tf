@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 resource "aws_instance" "server" {
-  ami                    = "ami-0f0a16801b42b89e8"
+  ami                    = "ami-a24f72c7"
   instance_type          = "t2.micro"
   availability_zone      = "us-east-2a"
   key_name               = "AZC"

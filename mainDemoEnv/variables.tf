@@ -12,3 +12,7 @@ variable "app_name" {
   description = "Application Name"
   default     = "notSet"
 }
+
+variable "domain_root" {
+  description = "Root of domain for site"
+}
