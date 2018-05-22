@@ -8,7 +8,7 @@ variable "environment" {
   default     = "notSet"
 }
 
-variable "region" {
+variable "aws_region" {
   description = "Region for network to be deployed"
   default     = "us-east-2"
 }
