@@ -10,6 +10,6 @@ output "region" {
   value = "${var.aws_region}"
 }
 
-output "security_group" {
+output "security_group_id" {
   value = "${module.security_group.this_security_group_id}"
 }
