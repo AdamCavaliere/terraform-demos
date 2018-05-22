@@ -8,12 +8,12 @@ variable "environment" {
   default     = "notSet"
 }
 
-variable "aws_region" {
-  description = "Region for network to be deployed"
-  default     = "us-east-2"
-}
-
 variable "application_name" {
   description = "Application Name"
   default     = "notSet"
+}
+
+variable "ami_id" {
+  description = "AMI for launch"
+  default     = "ami-03541b04e3b4c1e7e"
 }
