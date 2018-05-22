@@ -21,7 +21,7 @@ module "ec2" {
   subnet_id                   = "${element(data.terraform_remote_state.networkdetails.public_subnets, 0)}"
   vpc_security_group_ids      = ["${data.terraform_remote_state.networkdetails.security_group}"]
   associate_public_ip_address = true
-  key_name                    = "azc"
+  key_name                    = "AZC"
 
   tags = {
     Owner = "Adam"
