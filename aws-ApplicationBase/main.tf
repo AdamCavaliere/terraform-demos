@@ -17,7 +17,7 @@ module "ec2" {
   instance_count              = 2
   name                        = "${var.application_name}"
   ami                         = "${var.ami_id}"
-  instance_type               = "t2.micro"
+  instance_type               = "t2.small"
   subnet_id                   = "${element(data.terraform_remote_state.networkdetails.public_subnets, 0)}"
   vpc_security_group_ids      = ["${data.terraform_remote_state.networkdetails.security_group}"]
   associate_public_ip_address = true
