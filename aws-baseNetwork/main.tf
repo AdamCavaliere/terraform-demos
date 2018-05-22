@@ -1,10 +1,14 @@
+provider "aws" {
+  region = "${var.aws_region}"
+}
+
 module "vpc" {
   source = "terraform-aws-modules/vpc/aws"
 
   name = "VPC-${var.network_name}"
   cidr = "10.0.0.0/16"
 
-  azs            = ["us-west-1a", "us-west-1c"]
+  azs            = ["${var.aws_region}a", "${var.aws_region}c"]
   public_subnets = ["10.0.1.0/24", "10.0.2.0/24"]
 
   enable_nat_gateway = false

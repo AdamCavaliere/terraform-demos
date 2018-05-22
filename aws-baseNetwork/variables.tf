@@ -7,3 +7,8 @@ variable "environment" {
   description = "Environment Type - dev, stage, prod"
   default     = "notSet"
 }
+
+variable "region" {
+  description = "Region for network to be deployed"
+  default     = "us-east-2"
+}
