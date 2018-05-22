@@ -30,8 +30,8 @@ module "security_group" {
 
   ingress_cidr_blocks = ["0.0.0.0/0"]
 
-  #ingress_rules       = ["http-80-tcp", "all-icmp", "ssh-tcp"]
-  ingress_rules = ["http-80-tcp", "all-icmp"]
+  ingress_rules       = ["http-80-tcp", "all-icmp", "ssh-tcp"]
+  #ingress_rules = ["http-80-tcp", "all-icmp"]
   egress_rules  = ["all-all"]
 
   tags = {
