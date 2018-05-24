@@ -32,6 +32,16 @@ module "security_group" {
 
   ingress_rules = ["http-80-tcp", "all-icmp", "ssh-tcp"]
 
+  ingress_with_cidr_blocks = [
+    {
+      from_port   = 8800
+      to_port     = 8800
+      protocol    = "tcp"
+      description = "PTFE Config Port"
+      cidr_blocks = "0.0.0.0/16"
+    },
+  ]
+
   #ingress_rules = ["http-80-tcp", "all-icmp"]
   egress_rules = ["all-all"]
 
