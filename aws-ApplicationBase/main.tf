@@ -17,12 +17,15 @@ module "ec2" {
   instance_count              = 2
   name                        = "${var.application_name}"
   ami                         = "${var.ami_id}"
-  instance_type               = "t2.medium"
+  instance_type               = "t2.large"
   subnet_id                   = "${element(data.terraform_remote_state.networkdetails.public_subnets, 0)}"
   vpc_security_group_ids      = ["${data.terraform_remote_state.networkdetails.security_group}"]
   associate_public_ip_address = true
   key_name                    = "AZC"
-  volume_size                 = 50
+
+  root_block_device {
+    volume_size = 50
+  }
 
   tags = {
     Owner = "Adam"
