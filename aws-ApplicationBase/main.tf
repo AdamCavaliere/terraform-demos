@@ -23,9 +23,9 @@ module "ec2" {
   associate_public_ip_address = true
   key_name                    = "AZC"
 
-  root_block_device = {
+  root_block_device = [{
     volume_size = "50"
-  }
+  }]
 
   tags = {
     Owner = "Adam"
