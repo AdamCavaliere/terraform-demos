@@ -14,7 +14,7 @@ module "ec2" {
   source  = "terraform-aws-modules/ec2-instance/aws"
   version = "1.3.0"
 
-  instance_count              = 2
+  instance_count              = 1
   name                        = "${var.application_name}"
   ami                         = "${var.ami_id}"
   instance_type               = "${var.instance_type}"
@@ -42,5 +42,5 @@ resource "aws_route53_record" "www" {
   name    = "${var.application_name}.${var.domain_root}"
   type    = "A"
   ttl     = "300"
-  records = ["${aws_instance.server.public_ip}"]
+  records = ["${element(module.ec2.public_ip, 0)}"]
 }
