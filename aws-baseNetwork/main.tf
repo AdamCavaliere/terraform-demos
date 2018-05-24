@@ -38,7 +38,7 @@ module "security_group" {
       to_port     = 8800
       protocol    = "tcp"
       description = "PTFE Config Port"
-      cidr_blocks = "0.0.0.0/16"
+      cidr_blocks = "0.0.0.0/0"
     },
   ]
 
