@@ -16,3 +16,8 @@ variable "app_name" {
 variable "domain_root" {
   description = "Root of domain for site"
 }
+
+variable "network_workspace" {
+  description = "Network workspace to utilize"
+  default     = "notSet"
+}

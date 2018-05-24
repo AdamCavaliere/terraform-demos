@@ -1,5 +1,13 @@
 provider "aws" {
-  region = "${var.aws_region}"
+  region = "${data.terraform_remote_state.networkdetails.region}"
+}
+
+data "terraform_remote_state" "networkdetails" {
+  backend = "atlas"
+
+  config {
+    name = "azc/${var.network_workspace}"
+  }
 }
 
 resource "aws_instance" "server" {
@@ -7,7 +15,7 @@ resource "aws_instance" "server" {
   instance_type          = "t2.micro"
   availability_zone      = "us-east-2a"
   key_name               = "AZC"
-  vpc_security_group_ids = ["${module.security_group.this_security_group_id}"]
+  vpc_security_group_ids = ["${data.terraform_remote_state.networkdetails.security_group}"]
 
   tags {
     Name  = "${var.app_name}-server-${count.index}"
@@ -15,5 +23,5 @@ resource "aws_instance" "server" {
     TTL   = -1
   }
 
-  subnet_id = "${element(module.vpc.public_subnets, 0)}"
+  subnet_id = "${element(data.terraform_remote_state.networkdetails.public_subnets, 0)}"
 }
