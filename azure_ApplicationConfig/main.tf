@@ -78,7 +78,7 @@ resource "azurerm_virtual_machine" "app_vm" {
 resource "azurerm_sql_firewall_rule" "dbrule" {
   count               = "${var.database_workspace == "" ? 0 : var.instance_count}"
   name                = "${var.app_name}-DBRule-${count.index}"
-  resource_group_name = "${azurerm_resource_group.resource_gp.name}"
+  resource_group_name = "${data.terraform_remote_state.databasedetails.db-rg}"
   server_name         = "${data.terraform_remote_state.databasedetails.dbname}"
   start_ip_address    = "${azurerm_network_interface.netint.*.private_ip_address[count.index]}"
   end_ip_address      = "${azurerm_network_interface.netint.*.private_ip_address[count.index]}"
