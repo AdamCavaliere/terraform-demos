@@ -80,6 +80,6 @@ resource "azurerm_sql_firewall_rule" "dbrule" {
   name                = "${var.app_name}-DBRule-${count.index}"
   resource_group_name = "${azurerm_resource_group.resource_gp.name}"
   server_name         = "${data.terraform_remote_state.databasedetails.databasename}"
-  start_ip_address    = "${azurerm_network_interface.netint.*.private_ip_address}"
-  end_ip_address      = "${azurerm_network_interface.netint.*.private_ip_address}"
+  start_ip_address    = "${azurerm_network_interface.netint.*.private_ip_address[count.index]}"
+  end_ip_address      = "${azurerm_network_interface.netint.*.private_ip_address[count.index]}"
 }
