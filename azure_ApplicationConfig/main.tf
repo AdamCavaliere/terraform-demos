@@ -8,7 +8,7 @@ data "terraform_remote_state" "networkdetails" {
   }
 }
 
-data "terraform_remote_state" "networkdetails" {
+data "terraform_remote_state" "databasedetails" {
   backend = "atlas"
 
   config {
@@ -78,7 +78,7 @@ resource "azurerm_sql_firewall_rule" "dbrule" {
   count               = "${var.database_workspace == "" ? 0 : var.instance_count}"
   name                = "${var.app_name}-DBRule-${count.index}"
   resource_group_name = "${azurerm_resource_group.resource_gp.name}"
-  server_name         = "${azurerm_sql_server.test.name}"
+  server_name         = "${data.terraform_remote_state.databasedetails.dbname}"
   start_ip_address    = "${azurerm_network_interface.netint.*.private_ip_address}"
   end_ip_address      = "${azurerm_network_interface.netint.*.private_ip_address}"
 }
