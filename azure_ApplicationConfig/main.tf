@@ -9,6 +9,7 @@ data "terraform_remote_state" "networkdetails" {
 }
 
 data "terraform_remote_state" "databasedetails" {
+  count   = "${var.database_workspace == "" ? 0 : 1}"
   backend = "atlas"
 
   config {
