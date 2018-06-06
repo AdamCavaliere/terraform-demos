@@ -26,5 +26,5 @@ resource "azurerm_sql_virtual_network_rule" "sqlvnetrule" {
   name                = "sql-vnet-rule"
   resource_group_name = "${azurerm_resource_group.resource_gp.name}"
   server_name         = "${azurerm_sql_server.sqlserver.name}"
-  subnet_id           = "${data.terraform_remote_state.networkdetails.mainsubnet}"
+  subnet_id           = "${data.terraform_remote_state.networkdetails.dbsubnet}"
 }

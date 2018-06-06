@@ -5,6 +5,12 @@ variable "instance_count" {
 
 variable "network_workspace" {
   description = "Workspace to reference for network resources"
+  default     = "mustBeSet"
+}
+
+variable "database_workspace" {
+  description = "Workspace to reference for network resources"
+  default     = ""
 }
 
 variable "app_name" {

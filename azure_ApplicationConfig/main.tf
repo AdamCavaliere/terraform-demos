@@ -8,6 +8,14 @@ data "terraform_remote_state" "networkdetails" {
   }
 }
 
+data "terraform_remote_state" "networkdetails" {
+  backend = "atlas"
+
+  config {
+    name = "azc/${var.database_workspace}"
+  }
+}
+
 resource "azurerm_resource_group" "resource_gp" {
   name     = "${var.app_name}-rg"
   location = "${data.terraform_remote_state.networkdetails.location}"
@@ -64,4 +72,13 @@ resource "azurerm_virtual_machine" "app_vm" {
   tags {
     environment = "staging"
   }
+}
+
+resource "azurerm_sql_firewall_rule" "dbrule" {
+  count               = "${var.network_workspace == "" ? 0 : var.instance_count}"
+  name                = "${var.app_name}-DBRule-${count.index}"
+  resource_group_name = "${azurerm_resource_group.resource_gp.name}"
+  server_name         = "${azurerm_sql_server.test.name}"
+  start_ip_address    = "${azurerm_network_interface.netint.*.private_ip_address}"
+  end_ip_address      = "${azurerm_network_interface.netint.*.private_ip_address}"
 }
