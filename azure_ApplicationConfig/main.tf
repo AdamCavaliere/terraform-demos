@@ -50,7 +50,7 @@ resource "azurerm_virtual_machine" "app_vm" {
     create_option     = "FromImage"
     managed_disk_type = "Standard_LRS"
   }
-  
+
   os_profile {
     computer_name  = "${var.app_name}-${count.index + 1}"
     admin_username = "testadmin"
