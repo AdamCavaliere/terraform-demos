@@ -15,7 +15,7 @@ module "ec2" {
   version = "1.3.0"
 
   instance_count              = 2
-  name                        = "${var.application_name}"
+  name                        = "${var.application_name}-demo"
   ami                         = "${var.ami_id}"
   instance_type               = "${var.instance_type}"
   subnet_id                   = "${element(data.terraform_remote_state.networkdetails.public_subnets, 0)}"
