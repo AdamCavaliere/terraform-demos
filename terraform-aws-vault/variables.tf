@@ -1,4 +1,4 @@
-variable "aws_region" {
+variable "region" {
   description = "Region to launch instances"
   default     = "us-east-2"
 }

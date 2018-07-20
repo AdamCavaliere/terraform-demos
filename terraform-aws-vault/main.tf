@@ -5,7 +5,7 @@ provider "aws" {
 }
 
 data "external" "region" {
-  program = ["./delay-vault-aws"]
+  program = ["./delay-vault-aws", "${var.region}"]
 }
 
 data "terraform_remote_state" "networkdetails" {
