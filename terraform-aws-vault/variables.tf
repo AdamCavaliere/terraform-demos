@@ -1,8 +1,3 @@
-variable "azs" {
-  description = "Availability Zones"
-  default     = ""
-}
-
 variable "aws_region" {
   description = "Region to launch instances"
   default     = "us-east-2"
@@ -27,7 +22,7 @@ variable "aws_role" {
   default     = "notSet"
 }
 
-variable "aws_path" {
-  description = "Path for reading the credentials"
+variable "aws_backend" {
+  description = "Backend for the AWS credentials"
   default     = "notSet"
 }
