@@ -59,6 +59,14 @@ resource "azurerm_virtual_machine" "app_vm" {
     create_option     = "FromImage"
     managed_disk_type = "Standard_LRS"
   }
+  
+    storage_data_disk {
+    name              = "${var.app_name}-datadisk1-${count.index + 1}"
+    managed_disk_type = "Standard_LRS"
+    create_option     = "Empty"
+    lun               = 0
+    disk_size_gb      = "500"
+}
 
   os_profile {
     computer_name  = "${var.app_name}-${count.index + 1}"
