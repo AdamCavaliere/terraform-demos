@@ -1,7 +1,7 @@
 provider "aws" {
   region     = "${data.external.region.result["region"]}"
-  access_key = "${vault_aws_access_credentials.aws_creds.access_key}"
-  secret_key = "${vault_aws_access_credentials.aws_creds.secret_key}"
+  access_key = "${data.vault_aws_access_credentials.aws_creds.access_key}"
+  secret_key = "${data.vault_aws_access_credentials.aws_creds.secret_key}"
 }
 
 data "external" "region" {
