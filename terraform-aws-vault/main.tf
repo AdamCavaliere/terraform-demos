@@ -18,7 +18,7 @@ data "terraform_remote_state" "networkdetails" {
 
 resource "aws_instance" "server" {
   ami                    = "${data.aws_ami.ubuntu.id}"
-  instance_type          = "t2.micro"
+  instance_type          = "t2.small"
   availability_zone      = "us-east-2a"
   key_name               = "AZC"
   vpc_security_group_ids = ["${data.terraform_remote_state.networkdetails.security_group}"]
