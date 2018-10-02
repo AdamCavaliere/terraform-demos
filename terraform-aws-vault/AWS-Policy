@@ -1,0 +1,8 @@
+# Create and manage tokens (renew, lookup, revoke, etc.)
+path "auth/token/*" {
+  capabilities = [ "create", "read", "update", "delete", "list", "sudo" ]
+}
+
+path "aws-tf/creds/deploy" {
+capabilities = ["read"]
+}
