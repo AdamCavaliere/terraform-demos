@@ -40,3 +40,7 @@ variable "instance_type" {
 variable "domain_root" {
   description = "Root of domain for site"
 }
+
+variable "WORKSPACE_TTL" {
+  description = "TTL of how long workspace should stick around"
+}
