@@ -36,7 +36,7 @@ resource "azurerm_network_interface" "netint" {
 }
 
 resource "azurerm_virtual_machine" "app_vm" {
-  name                          = "${var.app_name}-vm-${count.index + 1}"
+  name                          = "${var.app_name}-vmexample-${count.index + 1}"
   location                      = "${azurerm_resource_group.resource_gp.location}"
   resource_group_name           = "${azurerm_resource_group.resource_gp.name}"
   network_interface_ids         = ["${element(azurerm_network_interface.netint.*.id, count.index)}"]

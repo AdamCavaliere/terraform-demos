@@ -18,7 +18,7 @@ resource "azurerm_subnet" "main" {
 }
 
 resource "azurerm_subnet" "dbsub" {
-  name                 = "dbsubn"
+  name                 = "dbsubn2"
   resource_group_name  = "${azurerm_resource_group.resource_gp.name}"
   virtual_network_name = "${azurerm_virtual_network.network.name}"
   address_prefix       = "10.0.2.0/24"
