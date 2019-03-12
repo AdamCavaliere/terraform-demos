@@ -1,6 +1,6 @@
 variable "ami_id" {
-  description = "ID of the AMI to provision. Default is Ubuntu 14.04 Base Image"
-  default = "ami-154f4a75"
+  description = "ID of the AMI to provision."
+  default = "ami-0c178ece08f46853d"
 }
 
 variable "instance_type" {
